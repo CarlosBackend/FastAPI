@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter # Cria um roteador para criar as rotas
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
