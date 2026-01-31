@@ -12,3 +12,10 @@ class Usuario(base):
     senha = Column("senha", String, nullable=False)
     ativo = Column("ativo", Boolean, nullable=False)
     admin = Column("admin", Boolean, nullable=False)
+
+    def __init__(self, nome, email, senha, ativo, admin):
+        self.nome = nome
+        self.email = email
+        self.senha = senha
+        self.ativo = ativo
+        self.admin = admin
