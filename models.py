@@ -33,10 +33,10 @@ class Pedido(base):
 
     id = Column("id", Integer, primary_key=True, autoincrement=True, nullable=False)
     status = Column("status", ChoiceType(choices=STATUS_PEDIDOS), nullable=False)
-    usuario_id = Column("usuario_id", Integer, nullable=False, ForeignKey("usuarios.id"))
+    usuario_id = Column(Integer, ForeignKey("usuarios.id"), name="usuario_id", nullable=False)
     preco_total = Column("preco_total", Float, nullable=False)
 
-    def __init__(self, status = "pendente", usuario_id, preco_total = 0.0):
+    def __init__(self, usuario_id, status="pendente", preco_total=0.0):
         self.status = status
         self.usuario_id = usuario_id
         self.preco_total = preco_total
@@ -49,7 +49,7 @@ class ItemPedido(base):
     sabor = Column("sabor", String, nullable=False)
     tamanho = Column("tamanho",String)
     preco = Column("preco", Float, nullable=False)
-    pedido_id = Column("pedido_id", Integer, nullable=False, ForeignKey("pedidos.id"))
+    pedido_id = Column(Integer, ForeignKey("pedidos.id"), name="pedido_id", nullable=False)
 
     def __init__(self, quantidade, sabor, tamanho, preco, pedido_id):
         self.quantidade = quantidade
