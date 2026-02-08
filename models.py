@@ -4,9 +4,9 @@ from sqlalchemy_utils import ChoiceType
 
 
 db = create_engine("sqlite:///banco.db")
-base = declarative_base()
+Base = declarative_base()
 
-class Usuario(base):
+class Usuario(Base):
     __tablename__ = "usuarios"
     id = Column("id", Integer, primary_key=True, autoincrement=True, nullable=False)
     nome = Column("nome", String, nullable=False)
@@ -22,17 +22,17 @@ class Usuario(base):
         self.ativo = ativo
         self.admin = admin
 
-class Pedido(base):
+class Pedido(Base):
     __tablename__ = "pedidos"
 
-    STATUS_PEDIDOS = (
-        ("pendente", "Pendente"),
-        ("cancelado", "Cancelado"),
-        ("finalizado", "Finalizado"),
-    )
+    # STATUS_PEDIDOS = (
+    #     ("pendente", "Pendente"),
+    #     ("cancelado", "Cancelado"),
+    #     ("finalizado", "Finalizado"),
+    # )
 
     id = Column("id", Integer, primary_key=True, autoincrement=True, nullable=False)
-    status = Column("status", ChoiceType(choices=STATUS_PEDIDOS), nullable=False)
+    status = Column("status", String)
     usuario_id = Column(Integer, ForeignKey("usuarios.id"), name="usuario_id", nullable=False)
     preco_total = Column("preco_total", Float, nullable=False)
 
@@ -42,7 +42,7 @@ class Pedido(base):
         self.preco_total = preco_total
     
 
-class ItemPedido(base):
+class ItemPedido(Base):
     __tablename__ = "item_pedido"
     id = Column("id", Integer, primary_key=True, autoincrement=True, nullable=False)
     quantidade = Column("quantidade", Integer, nullable=False)
